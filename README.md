@@ -2,7 +2,7 @@
 
 Welcome to the Awesome E-Commerce API, a robust platform that powers your online shopping experience! This API provides a comprehensive set of features, allowing developers to build exciting and engaging e-commerce applications.
 
-**  Blast Off with Features:**
+**Blast Off with Features:**
 
 This Node.js backend takes your project to new heights with powerful features like:
 
