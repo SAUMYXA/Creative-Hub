@@ -13,7 +13,7 @@ This Node.js backend takes your project to new heights with powerful features li
 * **Logging Lorekeeper:** Track every action with detailed logs, keeping your project history clear and accessible.
 * **Payment Paladin:** Integrate with Razorpay for secure and smooth transactions, making checkout a breeze.
 
-** Chart Your Course:**
+**Chart Your Course:**
 
 1. **Install & Equip:** Blast off by installing dependencies with `npm install`.
 2. **Fuel Up:** Set your environment variables like `BUCKET_NAME` and `RAZORPAY_API_KEY` to power the system.
