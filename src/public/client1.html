@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat Client</title>
+    <script>
+        // Connect to the Socket.IO server
+        const socket = io();
+      
+        // Event listener for the send button
+        document.getElementById('send').addEventListener('click', () => {
+          const message = document.getElementById('message').value;
+          socket.emit('chat message', message);
+          document.getElementById('message').value = '';
+        });
+      
+        // Event listener for receiving messages
+        socket.on('chat message', (message) => {
+          const messages = document.getElementById('messages');
+          const li = document.createElement('li');
+          li.textContent = message;
+          messages.appendChild(li);
+        });
+      </script>
+</head>
+<body>
+    <div id="chat">
+        <div id="messages"></div>
+        <input type="text" id="messageInput" placeholder="Type a message...">
+        <button id="sendButton">Send</button>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/public/client.js"></script>
+</body>
+</html>

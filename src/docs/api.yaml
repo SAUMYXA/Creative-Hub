@@ -1,0 +1,2891 @@
+openapi: 3.0.0
+info:
+  title: Canverro
+  description: >-
+    Currently the instance is having some issues, till then you can use the
+    [https://canverro.onrender.com/](https://canverro.onrender.com/) as the
+    server for testing.
+  version: 1.0.0
+servers:
+  - url: https://canverro.onrender.com
+  - url: http://localhost:5000
+  - url: http://52.66.237.165:5000
+components:
+  securitySchemes:
+    oauth2Auth:
+      type: http
+      scheme: oauth2
+    bearerAuth:
+      type: http
+      scheme: bearer
+tags:
+  - name: Login / Register
+    description: >-
+      These routes are meant for all the tasks related to login/register for any
+      user
+  - name: User Profile
+    description: These routes are meant for all the request(s) related to user profile(s).
+  - name: Utilities
+    description: These are miscellaneous routes which are helpful.
+  - name: Shop Page
+    description: These routes handles the shop page.
+  - name: Home Page
+    description: These are the routes for the home page
+paths:
+  /user/register:
+    post:
+      tags:
+        - Login / Register
+      summary: Register User
+      description: |-
+        This route is meant for registering of the Users.
+
+        The following fields are necessary while registering
+
+        - Name
+        - Password - Must be of more than 6 characters
+        - Email
+        - Username
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: DCoder
+                email: dcoder@test.com
+                password: '123456'
+                username: dcoder
+                age: '32'
+                gender: male
+                mobile: '34234234234'
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '39'
+            ETag:
+              schema:
+                type: string
+                example: W/"27-t96oNDf0SksufIUUAvpeoEH36g8"
+            Date:
+              schema:
+                type: string
+                example: Tue, 23 May 2023 13:13:41 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                success: true
+                msg: New User Added
+        '400':
+          description: Bad Request
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '32'
+            ETag:
+              schema:
+                type: string
+                example: W/"20-/h2oznkU8fpL6PBG6VM2LJO4bqY"
+            Date:
+              schema:
+                type: string
+                example: Tue, 23 May 2023 13:13:00 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                msg: User is already exists
+  /user/login:
+    post:
+      tags:
+        - Login / Register
+      summary: Login User
+      description: |-
+        This route is meant for login of the user
+
+        The following fields are necessary while login
+
+        - Email
+        - Password
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: lakshay@testmail.com
+                password:
+                  type: integer
+                  example: '123456'
+              required:
+                - email
+                - password
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            auth-token:
+              schema:
+                type: string
+                example: >-
+                  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJleUpoYkdjaU9pSklVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKdVlXMWxJam9pVEdGcmMyaGhlU0lzSW1WdFlXbHNJam9pYkdGcmMyaGhlVUIwWlhOMGJXRnBiQzVqYjIwaUxDSmtZWFJsZEdsdFpTSTZJakV2TlM4eU1ESXpJREV4T2pFM09qQTRJSEJ0SWl3aWFXRjBJam94TmpneU9UWXpNakk0ZlEueU5SZ3dqWFdCa2tlb01GSW1PakpuX1pjdnAyRHF2UmNLak9hSF9yczBhRSIsImVtYWlsIjoibGFrc2hheUB0ZXN0bWFpbC5jb20iLCJkYXRldGltZSI6IjIzLzUvMjAyMyA2OjUwOjA3IHBtIiwiaWF0IjoxNjg0ODQ4MDA3LCJleHAiOjE2ODQ4NTE2MDd9.fu69pxmoHgvUxbXDNQJ7li1OwlrL8a9xAYuCkfym5GE
+            Set-Cookie:
+              schema:
+                type: string
+                example: >-
+                  refresh-token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiTGFrc2hheSIsImVtYWlsIjoibGFrc2hheUB0ZXN0bWFpbC5jb20iLCJkYXRldGltZSI6IjEvNS8yMDIzIDExOjE3OjA4IHBtIiwiaWF0IjoxNjgyOTYzMjI4fQ.yNRgwjXWBkkeoMFImOjJn_Zcvp2DqvRcKjOaH_rs0aE;
+                  Max-Age=604800; Path=/; Expires=Tue, 30 May 2023 13:20:07 GMT;
+                  HttpOnly
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '530'
+            ETag:
+              schema:
+                type: string
+                example: W/"212-Ej0MByS2JJaGONWtAq3J/UQ0tQQ"
+            Date:
+              schema:
+                type: string
+                example: Tue, 23 May 2023 13:20:07 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                auth-token: >-
+                  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJleUpoYkdjaU9pSklVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKdVlXMWxJam9pVEdGcmMyaGhlU0lzSW1WdFlXbHNJam9pYkdGcmMyaGhlVUIwWlhOMGJXRnBiQzVqYjIwaUxDSmtZWFJsZEdsdFpTSTZJakV2TlM4eU1ESXpJREV4T2pFM09qQTRJSEJ0SWl3aWFXRjBJam94TmpneU9UWXpNakk0ZlEueU5SZ3dqWFdCa2tlb01GSW1PakpuX1pjdnAyRHF2UmNLak9hSF9yczBhRSIsImVtYWlsIjoibGFrc2hheUB0ZXN0bWFpbC5jb20iLCJkYXRldGltZSI6IjIzLzUvMjAyMyA2OjUwOjA3IHBtIiwiaWF0IjoxNjg0ODQ4MDA3LCJleHAiOjE2ODQ4NTE2MDd9.fu69pxmoHgvUxbXDNQJ7li1OwlrL8a9xAYuCkfym5GE
+            text/plain:
+              schema:
+                type: string
+              example: You Failed to log in!
+  /logout:
+    post:
+      tags:
+        - Login / Register
+      summary: Logout User
+      description: Logout Functionality
+      requestBody:
+        content: {}
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '29'
+            ETag:
+              schema:
+                type: string
+                example: W/"1d-eVrDNIWRXkYUf+vb6Atq6rbkyjE"
+            Date:
+              schema:
+                type: string
+                example: Tue, 23 May 2023 13:21:06 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                msg: Logout successfully
+  /google:
+    get:
+      tags:
+        - Login / Register
+      summary: Google Sign in
+      description: |-
+        The route is meant for the google sign-in.
+
+        _**Note: Don't test this route in Postman**_
+      security:
+        - oauth2Auth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /google/callback:
+    get:
+      tags:
+        - Login / Register
+      summary: Google Signin Callback
+      description: |-
+        This is the callback url for the google sign-in
+
+        _**Note: Don't test this route in Postman**_
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /failedAuth:
+    get:
+      tags:
+        - Login / Register
+      summary: Failed Authentication
+      description: This route is meant for serving for the login failures's
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /good:
+    get:
+      tags:
+        - Login / Register
+      summary: Successful Authentication
+      description: This route is used for serving for the successful authentication.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /forgot-password:
+    get:
+      tags:
+        - Login / Register
+      summary: Forget Password
+      description: This route is for serving the forgot password page.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    post:
+      tags:
+        - Login / Register
+      summary: Forget Password
+      description: Forgot Password Functionality
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            type: object
+            schema:
+              properties:
+                email:
+                  type: string
+                  example: lakshay@testmail.com
+            required:
+              - email
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: text/html; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '40'
+            ETag:
+              schema:
+                type: string
+                example: W/"28-7eFZ6Xnb5z5Ukcs72DFOHo2n++8"
+            Date:
+              schema:
+                type: string
+                example: Tue, 23 May 2023 13:21:49 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            text/plain:
+              schema:
+                type: string
+              example: Password send here feature here in email
+  /reset-password/{id}/{token}:
+    get:
+      tags:
+        - Login / Register
+      summary: Reset Password
+      description: >-
+        This route is meant for serving reset password page.
+
+
+        **Query Parameters**
+
+
+        - id -> userID
+
+        - token -> JWT Token
+            
+
+        You'll get these parameters from the email (sent to the user after he
+        clicks on the forgot password)
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+        - name: token
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /reset-password:
+    post:
+      tags:
+        - Login / Register
+      summary: Reset Password
+      description: |-
+        Reset Password Functioanality
+
+        **Note: Password check is also implemented in backend**
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            type: object
+            schema:
+              properties:
+                password1:
+                  type: integer
+                  example: '123456'
+                password2:
+                  type: integer
+                  example: '123456'
+            required:
+              - password1
+              - password2
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /temporary-token:
+    get:
+      tags:
+        - Login / Register
+      summary: Get Temporary Token
+      description: >-
+        This route is meant for getting a new accessToken using the
+        refreshToken.
+
+
+        **Note: Send refresh Token (which is present in the cookies into the
+        authorization header in the request object)**
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: text/html; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '513'
+            ETag:
+              schema:
+                type: string
+                example: W/"201-2cFpp0BzSeinm4F21o51Yq2k56E"
+            Date:
+              schema:
+                type: string
+                example: Tue, 23 May 2023 13:22:48 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            text/plain:
+              schema:
+                type: string
+              example: >-
+                eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJleUpoYkdjaU9pSklVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKdVlXMWxJam9pVEdGcmMyaGhlU0lzSW1WdFlXbHNJam9pYkdGcmMyaGhlVUIwWlhOMGJXRnBiQzVqYjIwaUxDSmtZWFJsZEdsdFpTSTZJakV2TlM4eU1ESXpJREV4T2pFM09qQTRJSEJ0SWl3aWFXRjBJam94TmpneU9UWXpNakk0ZlEueU5SZ3dqWFdCa2tlb01GSW1PakpuX1pjdnAyRHF2UmNLak9hSF9yczBhRSIsImVtYWlsIjoibGFrc2hheUB0ZXN0bWFpbC5jb20iLCJkYXRldGltZSI6IjIzLzUvMjAyMyA2OjUyOjQ4IHBtIiwiaWF0IjoxNjg0ODQ4MTY4LCJleHAiOjE2ODQ4NTE3Njh9.fCNSo1lxsjozzRKTI1TdlMd_f5cSe7ijAONnFd6DZiE
+  /profile:
+    get:
+      tags:
+        - User Profile
+      summary: Profile
+      description: This route is meant for serving the user profile page
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: text/html; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '21'
+            ETag:
+              schema:
+                type: string
+                example: W/"15-DJ18QTnOqud+37khMCPoYwK9Ap4"
+            Date:
+              schema:
+                type: string
+                example: Tue, 23 May 2023 13:23:47 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            text/plain:
+              schema:
+                type: string
+              example: this is users profile
+  /dashboard:
+    get:
+      tags:
+        - User Profile
+      summary: Dashboard
+      description: This route is meant for serving the user dashboard page.
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: text/html; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '17'
+            ETag:
+              schema:
+                type: string
+                example: W/"11-ju5z5C9rSqf7YFwrlgw1qUlY5vo"
+            Date:
+              schema:
+                type: string
+                example: Tue, 23 May 2023 13:24:20 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            text/plain:
+              schema:
+                type: string
+              example: THis is dashboard
+  /getLikedProducts:
+    get:
+      tags:
+        - User Profile
+      summary: Liked Products
+      description: >-
+        This route is for getting the products which are liked by the current
+        logged-in user
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '761'
+            ETag:
+              schema:
+                type: string
+                example: W/"2f9-L8AiwaY49b59beGswFSWq2My4Wo"
+            Date:
+              schema:
+                type: string
+                example: Tue, 23 May 2023 13:24:44 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                - _id: 6457920335b4b8b0a6bfd3dc
+                  name: one piece hoddie
+                  caption: this is a white hoddie
+                  productDetails: this is made of fine cotton fabric
+                  imageName: $2b$10$mQ.WrAmgkjOwCO7peSBomuh9pFZpaI41dsUJQbeY8X8jTh46wv2p.
+                  price: 232
+                  imageUrl: >-
+                    https://res.cloudinary.com/zigy-prints/image/upload/v1683460612/ef5sv1di2wq0xbsumraz.jpg
+                  colour_available: []
+                  cloth_category: hoddie
+                  fabric_available: []
+                  avatar: 644ffb1c586ecbf840eaca1d
+                  likes:
+                    - 644ffb1c586ecbf840eaca1d
+                  pooled_user:
+                    - 644ffb1c586ecbf840eaca1d
+                  hashtags:
+                    - One_Piece
+                  review:
+                    - user: 644ffb1c586ecbf840eaca1d
+                      comment: this is a great one
+                      _id: 64660176dddab84c9fe1aaa0
+                  rating: []
+                  createdAt: '2023-05-07T11:56:51.158Z'
+                  updatedAt: '2023-05-18T10:44:06.192Z'
+                  __v: 3
+  /getLikedPosts:
+    get:
+      tags:
+        - User Profile
+      summary: Liked Posts
+      description: >-
+        This route is for getting the posts which are liked by the current
+        logged-in user
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '460'
+            ETag:
+              schema:
+                type: string
+                example: W/"1cc-74iuPautHXreCSmkGvXvKzlm+3I"
+            Date:
+              schema:
+                type: string
+                example: Tue, 23 May 2023 13:26:00 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                - _id: 64579fa67716e23774ebd398
+                  avatar: 644ffb1c586ecbf840eaca1d
+                  likes:
+                    - 644ffb1c586ecbf840eaca1d
+                  imageName: $2b$10$KyAYltoHbBuI4naH75qJ4uj8pOV0KVdxiorLKXX4VxN9fVucG8kDC
+                  imageUrl: >-
+                    https://res.cloudinary.com/zigy-prints/image/upload/v1683464104/bilqjhmzwjife1xtmmks.png
+                  hashtags:
+                    - dcoder
+                  owner: 644ffb1c586ecbf840eaca1d
+                  createdAt: '2023-05-07T12:55:02.527Z'
+                  comments: []
+                  updatedAt: '2023-05-18T11:22:20.904Z'
+                  __v: 1
+                  taggedOwner: []
+  /getPooledDesign:
+    get:
+      tags:
+        - User Profile
+      summary: Pooled Designs
+      description: This route is getting the list of the pooled designed by the user.
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '28'
+            ETag:
+              schema:
+                type: string
+                example: W/"1c-9U/Q/XpW/7Bwzsp7ejxrVdwl46I"
+            Date:
+              schema:
+                type: string
+                example: Tue, 23 May 2023 13:26:28 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                - 6457920335b4b8b0a6bfd3dc
+  /getWishlist:
+    get:
+      tags:
+        - User Profile
+      summary: Wishlist
+      description: This route is for getting the wishlist of the logged-in user.
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '28'
+            ETag:
+              schema:
+                type: string
+                example: W/"1c-9U/Q/XpW/7Bwzsp7ejxrVdwl46I"
+            Date:
+              schema:
+                type: string
+                example: Tue, 23 May 2023 13:26:59 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                - 6457920335b4b8b0a6bfd3dc
+  /getUserInfo:
+    get:
+      tags:
+        - User Profile
+      summary: User Info
+      description: This route is for getting the information regarding the current user.
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '145'
+            ETag:
+              schema:
+                type: string
+                example: W/"91-DAiGjKOJRbmNdpFJB+eMG6R7F4k"
+            Date:
+              schema:
+                type: string
+                example: Tue, 23 May 2023 13:27:34 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                name: Lakshay
+                email: lakshay@testmail.com
+                username: dcoder
+                DOB: null
+                mobileNumber: null
+                gender: ''
+                address:
+                  city: ''
+                  state: ''
+  /getUserProducts:
+    get:
+      tags:
+        - User Profile
+      summary: User Products
+      description: This route is getting all the Products of the current user.
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '761'
+            ETag:
+              schema:
+                type: string
+                example: W/"2f9-L8AiwaY49b59beGswFSWq2My4Wo"
+            Date:
+              schema:
+                type: string
+                example: Tue, 23 May 2023 13:27:56 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                - _id: 6457920335b4b8b0a6bfd3dc
+                  name: one piece hoddie
+                  caption: this is a white hoddie
+                  productDetails: this is made of fine cotton fabric
+                  imageName: $2b$10$mQ.WrAmgkjOwCO7peSBomuh9pFZpaI41dsUJQbeY8X8jTh46wv2p.
+                  price: 232
+                  imageUrl: >-
+                    https://res.cloudinary.com/zigy-prints/image/upload/v1683460612/ef5sv1di2wq0xbsumraz.jpg
+                  colour_available: []
+                  cloth_category: hoddie
+                  fabric_available: []
+                  avatar: 644ffb1c586ecbf840eaca1d
+                  likes:
+                    - 644ffb1c586ecbf840eaca1d
+                  pooled_user:
+                    - 644ffb1c586ecbf840eaca1d
+                  hashtags:
+                    - One_Piece
+                  review:
+                    - user: 644ffb1c586ecbf840eaca1d
+                      comment: this is a great one
+                      _id: 64660176dddab84c9fe1aaa0
+                  rating: []
+                  createdAt: '2023-05-07T11:56:51.158Z'
+                  updatedAt: '2023-05-18T10:44:06.192Z'
+                  __v: 3
+  /getUserPosts:
+    get:
+      tags:
+        - User Profile
+      summary: User Posts
+      description: This route is for getting all the Posts for the current user.
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '1159'
+            ETag:
+              schema:
+                type: string
+                example: W/"487-XpNBCbTNHTEuhaJWhy718nlacCY"
+            Date:
+              schema:
+                type: string
+                example: Tue, 23 May 2023 13:28:58 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                - _id: 64579fa67716e23774ebd398
+                  avatar: 644ffb1c586ecbf840eaca1d
+                  likes:
+                    - 644ffb1c586ecbf840eaca1d
+                  imageName: $2b$10$KyAYltoHbBuI4naH75qJ4uj8pOV0KVdxiorLKXX4VxN9fVucG8kDC
+                  imageUrl: >-
+                    https://res.cloudinary.com/zigy-prints/image/upload/v1683464104/bilqjhmzwjife1xtmmks.png
+                  hashtags:
+                    - dcoder
+                  owner: 644ffb1c586ecbf840eaca1d
+                  createdAt: '2023-05-07T12:55:02.527Z'
+                  comments: []
+                  updatedAt: '2023-05-18T11:22:20.904Z'
+                  __v: 1
+                  taggedOwner: []
+                - _id: 646afd99211160358b6238df
+                  caption: gr8
+                  avatar: 644ffb1c586ecbf840eaca1d
+                  likes: []
+                  imageName: $2b$10$krhHObkLtoXmVtm6dpxH6udzuCjTSxHpOo.eEdSNwN7VeUdrFq1q
+                  taggedOwner:
+                    - platform: Instagram
+                      handle: '@johndoe'
+                      _id: 646afd99211160358b6238e0
+                    - platform: Facebook
+                      handle: John Doe
+                      _id: 646afd99211160358b6238e1
+                    - platform: Twitter
+                      handle: '@johndoe'
+                      _id: 646afd99211160358b6238e2
+                  imageUrl: >-
+                    https://res.cloudinary.com/zigy-prints/image/upload/v1684733337/ldualblaluls0oxcxpd5.png
+                  hashtags:
+                    - dcoder
+                  owner: 644ffb1c586ecbf840eaca1d
+                  location: Gwalior
+                  createdAt: '2023-05-22T05:28:57.330Z'
+                  comments: []
+                  updatedAt: '2023-05-22T05:28:57.330Z'
+                  __v: 0
+  /setDeliveryAddress:
+    post:
+      tags:
+        - User Profile
+      summary: Set Delivery Address
+      description: |-
+        This route is for setting the Delivery Address for the current user.
+
+        **Note: The default values for the different fields are:**
+
+        - **Landmark - " "**
+        - **City - " "**
+        - **Pin - Null**
+        - **State - " "**
+        - **Country - " "**
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            type: object
+            schema:
+              properties:
+                '"landmark"':
+                  type: string
+                  example: ' "near howrah",'
+                '"city"':
+                  type: string
+                  example: ' "kolkata",'
+                '"pin"':
+                  type: string
+                  example: ' 232342,'
+                '"state"':
+                  type: string
+                  example: ' "west Bengal",'
+                '"country"':
+                  type: string
+                  example: ' "india"'
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '23'
+            ETag:
+              schema:
+                type: string
+                example: W/"17-5KyEX0e+v6Ua/IMuFiOxj01SJKk"
+            Date:
+              schema:
+                type: string
+                example: Tue, 23 May 2023 13:29:26 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                msg: Address Added
+  /myOrders:
+    get:
+      tags:
+        - User Profile
+      summary: My Orders
+      description: >-
+        This route is for getting all the orders placed by the current logged-in
+        user.
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '409'
+            ETag:
+              schema:
+                type: string
+                example: W/"199-bnk4Pdd7+Aw1S78GH/UifmJ+Iis"
+            Date:
+              schema:
+                type: string
+                example: Tue, 23 May 2023 13:29:55 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                - _id: 646604b7dddab84c9fe1aaa9
+                  productName: one piece hoddie
+                  productID: 6457920335b4b8b0a6bfd3dc
+                  price: '232'
+                  colour: white
+                  fabric: ':fabric'
+                  quantity: 3
+                  buyer: 644ffb1c586ecbf840eaca1d
+                  orderDate: '2023-05-18T10:57:59.667Z'
+                  userAddress: >-
+                    { pin: null, city: '', country: '', landmark: '', state: ''
+                    }
+                  createdAt: '2023-05-18T10:57:59.673Z'
+                  updatedAt: '2023-05-18T10:57:59.673Z'
+                  __v: 0
+  /post/like/{id}:
+    get:
+      tags:
+        - Utilities
+      summary: Like Post
+      description: >-
+        This route is for liking a post.
+
+
+        **Note: The id parameter is the id for the post which is to be liked**.
+
+
+        **If the request is fired once the post gets liked and if then it is
+        fired again then the post gets disliked.**
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 64579fa67716e23774ebd398
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '34'
+            ETag:
+              schema:
+                type: string
+                example: W/"22-tLfrlIV1VEbjBxuRGdCgXq/2h1w"
+            Date:
+              schema:
+                type: string
+                example: Tue, 23 May 2023 13:30:35 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                example-0:
+                  summary: Like Post
+                  value:
+                    success: true
+                    message: liked
+                example-1:
+                  summary: Like Post
+                  value:
+                    success: true
+                    message: unliked
+  /post/{id}:
+    delete:
+      tags:
+        - Utilities
+      summary: Delete Post
+      description: >-
+        This route is for deleting a post.  
+
+        **Note: The id parameter is the id for the post which is to be
+        deleted.**
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 64579fa67716e23774ebd398
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '41'
+            ETag:
+              schema:
+                type: string
+                example: W/"29-m34Dhqs2Ej9EWHmj4/YnHpXWWp4"
+            Date:
+              schema:
+                type: string
+                example: Tue, 23 May 2023 13:31:27 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                success: true
+                message: Post deleted
+        '404':
+          description: Not Found
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '44'
+            ETag:
+              schema:
+                type: string
+                example: W/"2c-pLltliiDNoF1mhB27W+uD7s8qqM"
+            Date:
+              schema:
+                type: string
+                example: Tue, 23 May 2023 13:37:14 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                success: false
+                message: Post not found
+  /subscribe/{id}:
+    get:
+      tags:
+        - Utilities
+      summary: Subscribe
+      description: >-
+        This route is for serving the subscribe/unsubscribe functionality.
+
+
+        **Note: The id parameter is the id of the user for subscribing or
+        unsubscribing**
+
+
+        **If the request is fired once the user gets subscribed and if then it
+        is fired again then the user gets unsubscribed.**
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 644ffb1c586ecbf840eaca1d
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '60'
+            ETag:
+              schema:
+                type: string
+                example: W/"3c-ZLD81564tbYSUzQuk4tD/+lcUew"
+            Date:
+              schema:
+                type: string
+                example: Tue, 23 May 2023 13:34:35 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                success: true
+                message: User Subscribed Successfully!!!
+        '404':
+          description: Not Found
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '44'
+            ETag:
+              schema:
+                type: string
+                example: W/"2c-EAnCIFy1uGovyo/FU6KYwnjLgrc"
+            Date:
+              schema:
+                type: string
+                example: Tue, 23 May 2023 13:33:29 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                success: false
+                message: User not found
+  /post/upload:
+    post:
+      tags:
+        - Utilities
+      summary: Upload Post
+      description: |-
+        This route is meant for handling the upload functionality for the posts.
+
+        **Note: You must provide hashtags in the req body.**
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                hashtags:
+                  type: string
+                  example: '#dcoder'
+                location:
+                  type: string
+                  example: Gwalior
+                taggedOwner:
+                  type: string
+                  example: >-
+                    [{"platform": "Instagram", "handle": "@johndoe"},
+                    {"platform": "Facebook", "handle": "John Doe"}, {"platform":
+                    "Twitter", "handle": "@johndoe"}]
+                image:
+                  type: string
+                  format: binary
+                caption:
+                  type: string
+                  example: gr8
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '20'
+            ETag:
+              schema:
+                type: string
+                example: W/"14-8vfFXlcZDOCDdC0JEA739KKnNO0"
+            Date:
+              schema:
+                type: string
+                example: Tue, 23 May 2023 13:38:26 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                msg: post added
+  /post/info/{id}:
+    get:
+      tags:
+        - Utilities
+      summary: Post Info
+      description: >-
+        Get the information for a particular post.
+
+
+        **Note: The id parameter in the query is the id of the post you want to
+        get the information about.**
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 646cc1d478765fc5fbaff247
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '699'
+            ETag:
+              schema:
+                type: string
+                example: W/"2bb-/Qn55lplnm3j8b7YEugB9G9FiBk"
+            Date:
+              schema:
+                type: string
+                example: Tue, 23 May 2023 13:39:54 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                example-0:
+                  summary: Post Info
+                  value:
+                    _id: 646cc1d478765fc5fbaff247
+                    caption: gr8
+                    avatar: 644ffb1c586ecbf840eaca1d
+                    likes: []
+                    imageName: >-
+                      $2b$10$EF56Ba62L00Aw15W4MYt5OKf9uSUPRaoawxMxLP3fDIEdiqjfEA4q
+                    taggedOwner:
+                      - platform: Instagram
+                        handle: '@johndoe'
+                        _id: 646cc1d478765fc5fbaff248
+                      - platform: Facebook
+                        handle: John Doe
+                        _id: 646cc1d478765fc5fbaff249
+                      - platform: Twitter
+                        handle: '@johndoe'
+                        _id: 646cc1d478765fc5fbaff24a
+                    imageUrl: >-
+                      https://res.cloudinary.com/zigy-prints/image/upload/v1684849109/iuczqzhfmwctbcw6btck.png
+                    hashtags:
+                      - dcoder
+                    owner: 644ffb1c586ecbf840eaca1d
+                    location: Gwalior
+                    createdAt: '2023-05-23T13:38:28.807Z'
+                    comments: []
+                    updatedAt: '2023-05-23T13:38:28.807Z'
+                    __v: 0
+                example-1:
+                  summary: Failed Response
+                  value: null
+  /product/post:
+    post:
+      tags:
+        - Utilities
+      summary: Upload Product
+      description: >-
+        This route is meant for handling the upload functionality for the
+        products.  
+
+        **Note: You must provide hashtags in the req body.**
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: one piece hoddie
+                caption:
+                  type: string
+                  example: this is a white hoddie
+                productDetails:
+                  type: string
+                  example: this is made of fine cotton fabric
+                price:
+                  type: integer
+                  example: '232'
+                hashtags:
+                  type: string
+                  example: '#One_Piece'
+                cloth_category:
+                  type: string
+                  example: hoddie
+                image:
+                  type: string
+                  format: binary
+                location:
+                  type: string
+                  example: Gwalior
+                '':
+                  type: string
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '23'
+            ETag:
+              schema:
+                type: string
+                example: W/"17-BP+bZ8srcGMwF+tSOeDuHAEaBTQ"
+            Date:
+              schema:
+                type: string
+                example: Tue, 23 May 2023 13:40:46 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                msg: product added
+  /getUserFollowers:
+    get:
+      tags:
+        - Utilities
+      summary: User Followers
+      description: This route is meant for getting the followers for a particular user.
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '55'
+            ETag:
+              schema:
+                type: string
+                example: W/"37-pnxOk+alEAbxV8+bzT1eDdifTZ8"
+            Date:
+              schema:
+                type: string
+                example: Tue, 23 May 2023 13:41:05 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                - 644ffb1c586ecbf840eaca1d
+                - 644ffb1c586ecbf840eaca1d
+  /getUserFollowing:
+    get:
+      tags:
+        - Utilities
+      summary: User Following
+      description: >-
+        This route handles the get request for retrieving the following(s) of
+        the user.
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '28'
+            ETag:
+              schema:
+                type: string
+                example: W/"1c-cfhzXDh1i5urQnnImtmTttPi27Y"
+            Date:
+              schema:
+                type: string
+                example: Tue, 23 May 2023 13:41:21 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                - 644ffb1c586ecbf840eaca1d
+  /pooldesign/{productId}:
+    get:
+      tags:
+        - Shop Page
+      summary: Pool Design
+      description: >-
+        This route handles the pooling functionality for the a product.
+
+
+        **Note: The id parameter in the query is the id of the product (or
+        design ) the user want to pool**
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: productId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 6457920335b4b8b0a6bfd3dc
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '786'
+            ETag:
+              schema:
+                type: string
+                example: W/"312-nJfiGLA/qtaQzWr2aRsvaaVOeBU"
+            Date:
+              schema:
+                type: string
+                example: Tue, 23 May 2023 13:41:42 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                example-0:
+                  summary: Pool Design
+                  value:
+                    _id: 6457920335b4b8b0a6bfd3dc
+                    name: one piece hoddie
+                    caption: this is a white hoddie
+                    productDetails: this is made of fine cotton fabric
+                    imageName: >-
+                      $2b$10$mQ.WrAmgkjOwCO7peSBomuh9pFZpaI41dsUJQbeY8X8jTh46wv2p.
+                    price: 232
+                    imageUrl: >-
+                      https://res.cloudinary.com/zigy-prints/image/upload/v1683460612/ef5sv1di2wq0xbsumraz.jpg
+                    colour_available: []
+                    cloth_category: hoddie
+                    fabric_available: []
+                    avatar: 644ffb1c586ecbf840eaca1d
+                    likes:
+                      - 644ffb1c586ecbf840eaca1d
+                    pooled_user:
+                      - 644ffb1c586ecbf840eaca1d
+                      - 644ffb1c586ecbf840eaca1d
+                    hashtags:
+                      - One_Piece
+                    review:
+                      - user: 644ffb1c586ecbf840eaca1d
+                        comment: this is a great one
+                        _id: 64660176dddab84c9fe1aaa0
+                    rating: []
+                    createdAt: '2023-05-07T11:56:51.158Z'
+                    updatedAt: '2023-05-18T10:44:06.192Z'
+                    __v: 3
+                example-1:
+                  summary: Failed Response
+                  value:
+                    error: {}
+  /product/info/{id}:
+    get:
+      tags:
+        - Shop Page
+      summary: Product Info
+      description: >-
+        This route handles the get request for the information of a particular
+        product.
+
+
+        **Note: The id parameter is the id of the product you want the
+        information for.**
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 6457920335b4b8b0a6bfd3dc
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '813'
+            ETag:
+              schema:
+                type: string
+                example: W/"32d-lBYl4eZrKUC8N+P6kF/pdEwE+DU"
+            Date:
+              schema:
+                type: string
+                example: Tue, 23 May 2023 13:42:58 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                example-0:
+                  summary: Product Info
+                  value:
+                    _id: 6457920335b4b8b0a6bfd3dc
+                    name: one piece hoddie
+                    caption: this is a white hoddie
+                    productDetails: this is made of fine cotton fabric
+                    imageName: >-
+                      $2b$10$mQ.WrAmgkjOwCO7peSBomuh9pFZpaI41dsUJQbeY8X8jTh46wv2p.
+                    price: 232
+                    imageUrl: >-
+                      https://res.cloudinary.com/zigy-prints/image/upload/v1683460612/ef5sv1di2wq0xbsumraz.jpg
+                    colour_available: []
+                    cloth_category: hoddie
+                    fabric_available: []
+                    avatar: 644ffb1c586ecbf840eaca1d
+                    likes:
+                      - 644ffb1c586ecbf840eaca1d
+                    pooled_user:
+                      - 644ffb1c586ecbf840eaca1d
+                      - 644ffb1c586ecbf840eaca1d
+                      - 644ffb1c586ecbf840eaca1d
+                    hashtags:
+                      - One_Piece
+                    review:
+                      - user: 644ffb1c586ecbf840eaca1d
+                        comment: this is a great one
+                        _id: 64660176dddab84c9fe1aaa0
+                    rating: []
+                    createdAt: '2023-05-07T11:56:51.158Z'
+                    updatedAt: '2023-05-23T13:42:52.269Z'
+                    __v: 5
+                example-1:
+                  summary: Failed Response
+                  value: null
+  /product/like/{id}:
+    get:
+      tags:
+        - Shop Page
+      summary: Like Product
+      description: >-
+        This route is for liking a product.  
+
+        **Note: The id parameter is the id for the product which is to be
+        liked.**
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 6457920335b4b8b0a6bfd3dc
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '34'
+            ETag:
+              schema:
+                type: string
+                example: W/"22-tLfrlIV1VEbjBxuRGdCgXq/2h1w"
+            Date:
+              schema:
+                type: string
+                example: Tue, 23 May 2023 13:43:35 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                example-0:
+                  summary: Like Product
+                  value:
+                    success: true
+                    message: liked
+                example-1:
+                  summary: Like Product
+                  value:
+                    success: true
+                    message: unliked
+  /addToWishlist/{id}:
+    get:
+      tags:
+        - Shop Page
+      summary: Add to Wishlist
+      description: >-
+        Add to Wishlist functionality.
+
+
+        **Note: The id parameter is the id of the product you want to add to
+        wishlist.**
+
+
+        **If request is made twice then, the product is removed from the
+        wishlist**
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 6457920335b4b8b0a6bfd3dc
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '46'
+            ETag:
+              schema:
+                type: string
+                example: W/"2e-ppiGL4Y2RC2mNae0lRcmyCRTSFA"
+            Date:
+              schema:
+                type: string
+                example: Tue, 23 May 2023 13:43:56 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                example-0:
+                  summary: Add to Wishlist
+                  value:
+                    success: true
+                    message: added to wishlist
+                example-1:
+                  summary: Add to Wishlist
+                  value:
+                    success: true
+                    message: removed from wishlist
+  /postReviewProduct/{id}:
+    post:
+      tags:
+        - Shop Page
+      summary: Review Product
+      description: >-
+        Review the Product funcationality.
+
+
+        **Note: The id parameter is the id of the product for which you want to
+        publish the review.**
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            type: object
+            schema:
+              properties:
+                review:
+                  type: string
+                  example: this is a great one
+            required:
+              - review
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 6457920335b4b8b0a6bfd3dc
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '22'
+            ETag:
+              schema:
+                type: string
+                example: W/"16-pfHEgYicuiav0JDOlk8+fb7xErg"
+            Date:
+              schema:
+                type: string
+                example: Tue, 23 May 2023 13:44:16 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                msg: review added
+  /getReviewProduct/{id}:
+    get:
+      tags:
+        - Shop Page
+      summary: Review Product
+      description: >-
+        Get the review(s) for a particular product.
+
+
+        **Note: The id parameter is the id of the product for which you want the
+        reviews.**
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 6457920335b4b8b0a6bfd3dc
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '203'
+            ETag:
+              schema:
+                type: string
+                example: W/"cb-6XBLU9RBSlflZhp2RNvEPHrkKKY"
+            Date:
+              schema:
+                type: string
+                example: Tue, 23 May 2023 13:44:27 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                - user: 644ffb1c586ecbf840eaca1d
+                  comment: this is a great one
+                  _id: 64660176dddab84c9fe1aaa0
+                - user: 644ffb1c586ecbf840eaca1d
+                  comment: this is a great one
+                  _id: 646cc33078765fc5fbaff289
+  /placeOrder/{productId}/{quantity}/{colour}/{fabric}:
+    get:
+      tags:
+        - Shop Page
+      summary: Place Order
+      description: |-
+        Place order funcationality
+
+        **Note: You must pass the keys productId, quantity, colour and fabric.**
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: productId
+          in: path
+          schema:
+            type: string
+          required: true
+          example: 6457920335b4b8b0a6bfd3dc
+        - name: quantity
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '3'
+        - name: colour
+          in: path
+          schema:
+            type: string
+          required: true
+          example: white
+        - name: fabric
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '22'
+            ETag:
+              schema:
+                type: string
+                example: W/"16-7w3QxmqDTyidPm4TMiAgrpJ8w1M"
+            Date:
+              schema:
+                type: string
+                example: Tue, 23 May 2023 13:44:40 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                msg: Order Placed
+  /search/{data}:
+    get:
+      tags:
+        - Home Page
+      summary: Search
+      description: >-
+        Search funcationality - get(s) all the products,posts and pooled_designs consistings of the data keyword
+
+
+        **Note: The data parameter is the keyword you want to search.**
+
+
+        **The filter can be 'products', 'posts', 'pooled_designs' to filter the
+        result.**
+      parameters:
+        - name: filter
+          in: query
+          schema:
+            type: string
+          example: pooled_designs
+        - name: data
+          in: path
+          schema:
+            type: string
+          required: true
+          example: one piece
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '2476'
+            ETag:
+              schema:
+                type: string
+                example: W/"9ac-u5jt4lYT5KEOLpvU9L8+OE2Rv0E"
+            Date:
+              schema:
+                type: string
+                example: Tue, 23 May 2023 13:02:59 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                products: []
+                posts: []
+                pooled_designs:
+                  - colour_available: []
+                    fabric_available: []
+                    hashtags: []
+                    _id: 637b99ce0258fade43276403
+                    name: rainbow hoodie
+                    caption: this is a white hoodie
+                    productDetails: this is made of fine cotton fabric
+                    image: >-
+                      https://res.cloudinary.com/canverrotest/image/upload/v1669044686/q6uk35ygtjo2atre2eij.jpg
+                    cloudanry_id: q6uk35ygtjo2atre2eij
+                    likes: []
+                    pooled_user:
+                      - 637ba91e1a51fd10a245842a
+                      - 637ba1685f885421eca07c04
+                    comments: []
+                    createdAt: '2022-11-21T15:31:26.872Z'
+                    updatedAt: '2022-11-21T16:39:37.716Z'
+                    __v: 2
+                    review: []
+                    rating: []
+                  - colour_available: []
+                    fabric_available: []
+                    _id: 637e2ca4a8aff50b795eb13c
+                    name: anime hoodie
+                    caption: this is a anime hoodie
+                    productDetails: this is made of fine cotton fabric
+                    image: >-
+                      https://res.cloudinary.com/canverrotest/image/upload/v1669213348/tfl9nifagp4diitqatxg.jpg
+                    cloudanry_id: tfl9nifagp4diitqatxg
+                    likes: []
+                    pooled_user:
+                      - 637ba1685f885421eca07c04
+                      - 63bd98d324398724b11a90ad
+                    comments: []
+                    createdAt: '2022-11-23T14:22:28.873Z'
+                    updatedAt: '2023-01-10T17:05:33.522Z'
+                    __v: 2
+                    hashtags: []
+                    review: []
+                    rating: []
+                  - colour_available: []
+                    fabric_available: []
+                    _id: 638b34fa26d8a5dba17914e8
+                    name: sweatshirt2
+                    caption: this is a rainbow sweatshirt
+                    productDetails: this is made of fine cotton fabric
+                    image: >-
+                      https://res.cloudinary.com/canverrotest/image/upload/v1670067450/l1dotcjn0kto8wwewct9.jpg
+                    cloudanry_id: l1dotcjn0kto8wwewct9
+                    likes: []
+                    pooled_user:
+                      - 637ba91e1a51fd10a245842a
+                      - 63a9b1522f41d94f8bb7b233
+                    hashtags:
+                      - 'rainbow '
+                      - sweatshirt
+                    review: []
+                    createdAt: '2022-12-03T11:37:30.684Z'
+                    updatedAt: '2023-01-10T17:04:32.200Z'
+                    __v: 2
+                    comments: []
+                    rating: []
+                  - _id: 6457920335b4b8b0a6bfd3dc
+                    name: one piece hoddie
+                    caption: this is a white hoddie
+                    productDetails: this is made of fine cotton fabric
+                    imageName: >-
+                      $2b$10$mQ.WrAmgkjOwCO7peSBomuh9pFZpaI41dsUJQbeY8X8jTh46wv2p.
+                    price: 232
+                    imageUrl: >-
+                      https://res.cloudinary.com/zigy-prints/image/upload/v1683460612/ef5sv1di2wq0xbsumraz.jpg
+                    colour_available: []
+                    cloth_category: hoddie
+                    fabric_available: []
+                    avatar: 644ffb1c586ecbf840eaca1d
+                    likes:
+                      - 644ffb1c586ecbf840eaca1d
+                    pooled_user:
+                      - 644ffb1c586ecbf840eaca1d
+                    hashtags:
+                      - One_Piece
+                    review:
+                      - user: 644ffb1c586ecbf840eaca1d
+                        comment: this is a great one
+                        _id: 64660176dddab84c9fe1aaa0
+                    rating: []
+                    createdAt: '2023-05-07T11:56:51.158Z'
+                    updatedAt: '2023-05-18T10:44:06.192Z'
+                    __v: 3
+  /getAllProducts/{number}/{call}:
+    get:
+      tags:
+        - Home Page
+      summary: All Products
+      description: >-
+        Get all the products funcationality
+
+
+        **Note: The number parameter is the number of products to be received
+        and call represents the nth call made to the API.**
+      parameters:
+        - name: number
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '5'
+        - name: call
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '5'
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '2141'
+            ETag:
+              schema:
+                type: string
+                example: W/"85d-vT8FQO8MicIwAN+6rvY/S+aUrUo"
+            Date:
+              schema:
+                type: string
+                example: Tue, 23 May 2023 13:02:02 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                - colour_available: []
+                  fabric_available: []
+                  _id: 63a59fd2a3f475a2e0deee30
+                  name: green hoodie
+                  caption: this is a white hoodie
+                  productDetails: this is made of fine cotton fabric
+                  image: >-
+                    https://res.cloudinary.com/canverrotest/image/upload/v1671798738/d9rkkpzhxzfgmxj78iss.jpg
+                  cloudanry_id: d9rkkpzhxzfgmxj78iss
+                  likes: []
+                  pooled_user: []
+                  hashtags:
+                    - 'colour '
+                    - creative
+                  review: []
+                  createdAt: '2022-12-23T12:32:18.895Z'
+                  updatedAt: '2022-12-23T12:32:18.895Z'
+                  __v: 0
+                  rating: []
+                - colour_available: []
+                  fabric_available: []
+                  _id: 63a7f72b23a0f4322fa16edf
+                  name: $2b$10$JeZ40/9LUYRMPNUUo5lHBOo56/UcHV/CMTPOWt9RMt25WdruBEmNO
+                  caption: this is a white hoodie
+                  productDetails: this is made of fine cotton fabric
+                  likes: []
+                  pooled_user: []
+                  hashtags:
+                    - 'colour '
+                    - creative
+                  review: []
+                  createdAt: '2022-12-25T07:09:31.256Z'
+                  updatedAt: '2022-12-25T07:09:31.256Z'
+                  __v: 0
+                  rating: []
+                - colour_available: []
+                  fabric_available: []
+                  _id: 63a7f849fde5fe647f41bb2e
+                  name: $2b$10$D2IKtDg9vQz5osHnU.2euObhreAqHD3nrOJAMUxmBK8gZ4JUw1e0S
+                  caption: this is a white hoodie
+                  productDetails: this is made of fine cotton fabric
+                  likes: []
+                  pooled_user: []
+                  hashtags:
+                    - 'colour '
+                    - creative
+                  review: []
+                  createdAt: '2022-12-25T07:14:17.211Z'
+                  updatedAt: '2022-12-25T07:14:17.211Z'
+                  __v: 0
+                  rating: []
+                - colour_available: []
+                  fabric_available: []
+                  _id: 63a7f8a931638918605aebed
+                  name: $2b$10$VGskAjf0FWYUSu.MnrgEf.Xx5d9fEJ/edRt2hkPN3tBMdh1xT2sqK
+                  caption: this is a white hoodie
+                  productDetails: this is made of fine cotton fabric
+                  likes: []
+                  pooled_user: []
+                  hashtags:
+                    - 'colour '
+                    - creative
+                  review: []
+                  createdAt: '2022-12-25T07:15:53.784Z'
+                  updatedAt: '2022-12-25T07:15:53.784Z'
+                  __v: 0
+                  rating: []
+                - colour_available: []
+                  fabric_available: []
+                  _id: 63a7f8d3e5d64751790a2b1f
+                  name: $2b$10$gn2F6cCfxNZGaZcRTyH01eKIbpooXOavkY8BsTUmVn4SncQsFrBxO
+                  caption: this is a white hoodie
+                  productDetails: this is made of fine cotton fabric
+                  likes: []
+                  pooled_user: []
+                  hashtags:
+                    - 'colour '
+                    - creative
+                  review: []
+                  createdAt: '2022-12-25T07:16:35.477Z'
+                  updatedAt: '2022-12-25T07:16:35.477Z'
+                  __v: 0
+                  rating: []
+  /getProductsHashtag/{hashtag}:
+    get:
+      tags:
+        - Home Page
+      summary: Product Hashtag
+      description: Get all the products with the **hastag parameter** as the hashtag.
+      parameters:
+        - name: hashtag
+          in: path
+          schema:
+            type: string
+          required: true
+          example: One_Piece
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '761'
+            ETag:
+              schema:
+                type: string
+                example: W/"2f9-L8AiwaY49b59beGswFSWq2My4Wo"
+            Date:
+              schema:
+                type: string
+                example: Tue, 23 May 2023 13:05:15 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                - _id: 6457920335b4b8b0a6bfd3dc
+                  name: one piece hoddie
+                  caption: this is a white hoddie
+                  productDetails: this is made of fine cotton fabric
+                  imageName: $2b$10$mQ.WrAmgkjOwCO7peSBomuh9pFZpaI41dsUJQbeY8X8jTh46wv2p.
+                  price: 232
+                  imageUrl: >-
+                    https://res.cloudinary.com/zigy-prints/image/upload/v1683460612/ef5sv1di2wq0xbsumraz.jpg
+                  colour_available: []
+                  cloth_category: hoddie
+                  fabric_available: []
+                  avatar: 644ffb1c586ecbf840eaca1d
+                  likes:
+                    - 644ffb1c586ecbf840eaca1d
+                  pooled_user:
+                    - 644ffb1c586ecbf840eaca1d
+                  hashtags:
+                    - One_Piece
+                  review:
+                    - user: 644ffb1c586ecbf840eaca1d
+                      comment: this is a great one
+                      _id: 64660176dddab84c9fe1aaa0
+                  rating: []
+                  createdAt: '2023-05-07T11:56:51.158Z'
+                  updatedAt: '2023-05-18T10:44:06.192Z'
+                  __v: 3
+  /posts/{number}/{call}:
+    get:
+      tags:
+        - Home Page
+      summary: All Posts
+      description: This route handles the get all posts request.
+      parameters:
+        - name: number
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '2'
+        - name: call
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '2'
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '593'
+            ETag:
+              schema:
+                type: string
+                example: W/"251-+fJJpy6sIiL1T7HO2qVXWZ2hpRU"
+            Date:
+              schema:
+                type: string
+                example: Tue, 23 May 2023 13:05:36 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                - hashtags: []
+                  _id: 63791b18c95ac9710ec64768
+                  caption: this a green hoodie
+                  productID: 6374ff4e3522494c239b8bf4
+                  owner: 6373e143e047c5e808723bc6
+                  likes:
+                    - 637e649c51cae9ae24cd53a7
+                  createdAt: '2022-11-19T18:06:16.198Z'
+                  comments: []
+                  updatedAt: '2022-11-24T16:55:53.992Z'
+                  __v: 1
+                  taggedOwner: []
+                - hashtags: []
+                  _id: 63a7444da17047a9bfec8c52
+                  caption: this a green hoodie
+                  productID: 6374ff4e3522494c239b8bf4
+                  owner: 638760a7f1249bb5008b24a4
+                  likes: []
+                  createdAt: '2022-12-24T18:26:21.604Z'
+                  comments: []
+                  updatedAt: '2022-12-24T18:26:21.604Z'
+                  __v: 0
+                  taggedOwner: []
