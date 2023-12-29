@@ -103,7 +103,6 @@ exports.registerUser = async (req: any, res: any) => {
             });
             res.json({ success: true, msg: "New User Added" });
             customlog.log('info','route: /user/register msg: success');
-
         })
         .catch((err: any) => {
             customlog.log('error','error while registering user');
