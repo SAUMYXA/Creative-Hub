@@ -478,68 +478,67 @@ exports.getUserInfo= async(req: any, res: any)=>{
 
 
 exports.removeAddressById = async (req: any, res: any) => {
-try {
-  const userId = req.user._id;
-  const user = await User.findById(userId);
-
-  // Extract the address ID from the request params
-  const addressIdToRemove = req.body.addressId;
-
-  // Find the index of the address in the user's address array
-  const addressIndex = user.address.findIndex(
-    (existingAddress: any) => existingAddress._id.toString() === addressIdToRemove
-  );
-
-  // If the address exists, remove it from the array
-  if (addressIndex !== -1) {
-    user.address.splice(addressIndex, 1);
-
-    // Save the updated user document
-    await user.save();
-
-    return res.json({ msg: 'Address removed successfully' });
-  } else {
-    return res.json({ error: 'Address not found' });
+  try {
+    const userId = req.user._id;
+    const user = await User.findById(userId);
+  
+    // Extract the address ID from the request params
+    const addressIdToRemove = req.body.addressId;
+  
+    // Find the index of the address in the user's address array
+    const addressIndex = user.address.findIndex(
+      (existingAddress: any) => existingAddress._id.toString() === addressIdToRemove
+    );
+  
+    // If the address exists, remove it from the array
+    if (addressIndex !== -1) {
+      user.address.splice(addressIndex, 1);
+  
+      // Save the updated user document
+      await user.save();
+  
+      return res.json({ msg: 'Address removed successfully' });
+    } else {
+      return res.json({ error: 'Address not found' });
+    }
+  } catch (error) {
+    console.error('Error while removing address:', error);
+    return res.status(500).json({ error: 'Internal Server Error' });
   }
-} catch (error) {
-  console.error('Error while removing address:', error);
-  return res.status(500).json({ error: 'Internal Server Error' });
-}
-};
-
-
-
-// Import necessary modules and models
-const mongoose = require('mongoose');
-
-
-// Add this API endpoint to remove an address by its ID
-exports.removeAddressById = async (req: any, res: any) => {
-try {
-  const userId = req.user._id;
-  const addressIdToRemove = req.body.addressId; // Assuming the addressId is passed in the request body
-
-  // Use Mongoose's $pull operator to remove the address with the given ID
-  const user = await User.findByIdAndUpdate(
-    userId,
-    { $pull: { address: { _id: mongoose.Types.ObjectId(addressIdToRemove) } } },
-    { new: true } // Return the modified document
-  );
-
-  // Check if the address with the given ID was successfully removed
-  if (!user) {
-    console.error('Address not found');
-    res.json({ error: 'Address not found' });
-    return;
+  };
+  
+  
+  
+  // Import necessary modules and models
+  const mongoose = require('mongoose');
+  
+  // Add this API endpoint to remove an address by its ID
+  exports.removeAddressById = async (req: any, res: any) => {
+  try {
+    const userId = req.user._id;
+    const addressIdToRemove = req.body.addressId; // Assuming the addressId is passed in the request body
+  
+    // Use Mongoose's $pull operator to remove the address with the given ID
+    const user = await User.findByIdAndUpdate(
+      userId,
+      { $pull: { address: { _id: mongoose.Types.ObjectId(addressIdToRemove) } } },
+      { new: true } // Return the modified document
+    );
+  
+    // Check if the address with the given ID was successfully removed
+    if (!user) {
+      console.error('Address not found');
+      res.json({ error: 'Address not found' });
+      return;
+    }
+  
+    console.log('Route: /removeAddressById Msg: success');
+    res.json({ msg: 'Address removed successfully' });
+  } catch (err:any) {
+    console.error('Error while removing delivery address');
+  res.json({ error: err.message || 'Internal Server Error' });
   }
-
-  console.log('Route: /removeAddressById Msg: success');
-  res.json({ msg: 'Address removed successfully' });
-} catch (err:any) {
-  console.error('Error while removing delivery address');
-res.json({ error: err.message || 'Internal Server Error' });
-}
-};
+  };
 exports.setDeliveryAddress = async (req: any, res: any) => {
     try {
       const userId = req.user._id;
