@@ -698,49 +698,50 @@ exports.getUserFollowing = async (req:any, res:any) => {
 
 
 
+
 exports.getUserFollowers = async(req:any,res:any)=>{
-    try{
-        let userId = req.user._id;
-        let userData = await User.findById(userId);
-        res.json(userData.followers);
-        console.log(userData.followers);
-        customlog.log('info','route: /getUserFollowers msg: success');
-    }catch(err){
-        customlog.log('error','error while retrieving the following lists');
-        res.json({error: err});
-    }
+  try{
+      let userId = req.user._id;
+      let userData = await User.findById(userId);
+      res.json(userData.followers);
+      console.log(userData.followers);
+      customlog.log('info','route: /getUserFollowers msg: success');
+  }catch(err){
+      customlog.log('error','error while retrieving the following lists');
+      res.json({error: err});
+  }
 }
 
 
 exports.getOtherUserInfo = async(req:any, res:any)=>{
-    try{
-        const uid = req.params.uid;
-        const userData = await User.findOne({ UID : uid });
+  try{
+      const uid = req.params.uid;
+      const userData = await User.findOne({ UID : uid });
 
-        if (!userData) {
-          // Handle the case where user with the specified uid is not found
-          return res.status(404).json({ error: 'User not found' });
-      }
-
-        // const productData = await User.find({avatar :userId})
-        const currentUserId = req.user._id;
-        const isFollowing = userData.followers.includes(currentUserId);
-        res.json({ 
-            _id:userData._id,
-            username:userData.username,
-            avatar:userData.avatar,
-            name:userData.name,
-            followers:userData.followers,
-            following : userData.following,
-            posts : userData.posts,
-            product : userData.products,
-            isFollowing,
-        });
-        customlog.log('info','route: /getOtherUserInfo msg: success');
-    }catch(err){
-        customlog.log('error','error while getting the other user info');
-        res.json({error: err});
+      if (!userData) {
+        // Handle the case where user with the specified uid is not found
+        return res.status(404).json({ error: 'User not found' });
     }
+
+      // const productData = await User.find({avatar :userId})
+      const currentUserId = req.user._id;
+      const isFollowing = userData.followers.includes(currentUserId);
+      res.json({ 
+          _id:userData._id,
+          username:userData.username,
+          avatar:userData.avatar,
+          name:userData.name,
+          followers:userData.followers,
+          following : userData.following,
+          posts : userData.posts,
+          product : userData.products,
+          isFollowing,
+      });
+      customlog.log('info','route: /getOtherUserInfo msg: success');
+  }catch(err){
+      customlog.log('error','error while getting the other user info');
+      res.json({error: err});
+  }
 }
 
 // exports.addToCart = async (req : any, res : any) => {
