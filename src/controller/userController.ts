@@ -323,7 +323,6 @@ try {
       }
       // Log the hashed password for debugging
       console.log("Hashed Password:", hash);
-  
       user.password = hash;
       user.save(function (err: any, updatedUser: any) {
         if (err) {
