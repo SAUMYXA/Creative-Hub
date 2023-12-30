@@ -713,6 +713,7 @@ exports.getUserFollowers = async(req:any,res:any)=>{
 }
 
 
+
 exports.getOtherUserInfo = async(req:any, res:any)=>{
   try{
       const uid = req.params.uid;
