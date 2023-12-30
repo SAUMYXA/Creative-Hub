@@ -321,7 +321,6 @@ try {
         console.error(err); // Log the error to the console for debugging
         return res.status(500).json({ error: "Error while hashing password" });
       }
-  
       // Log the hashed password for debugging
       console.log("Hashed Password:", hash);
   
