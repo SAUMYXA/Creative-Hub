@@ -539,7 +539,9 @@ exports.removeAddressById = async (req: any, res: any) => {
   res.json({ error: err.message || 'Internal Server Error' });
   }
   };
-exports.setDeliveryAddress = async (req: any, res: any) => {
+
+  
+  exports.setDeliveryAddress = async (req: any, res: any) => {
     try {
       const userId = req.user._id;
       const user = await User.findById(userId);
@@ -651,7 +653,6 @@ exports.getUserFollowing = async (req:any, res:any) => {
       res.status(500).json({ message: 'Internal Server Error' });
     }
   }
-
 
 // Update the getUserFollowing API
 exports.getUserFollowing = async (req:any, res:any) => {
