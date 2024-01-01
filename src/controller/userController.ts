@@ -1075,6 +1075,8 @@ exports.removeAddress = async (req: any, res: any) => {
 };
 
 
+
+
 exports.getOtherUserPostsandProducts = async(req:any, res:any)=>{
   try{
       const userId = req.params.id;
@@ -1142,6 +1144,7 @@ exports.getupdateproduct = async (req: any, res: any) => {
     });
   }
 };
+
 
 // exports.addUserFollowing = async(req:any,res:any) => {
 //   const user_id=req.body._id;
