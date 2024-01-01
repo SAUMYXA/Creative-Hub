@@ -991,6 +991,7 @@ exports.getOtherUserInfo = async(req:any, res:any)=>{
     }
   };
 
+  
   exports.postRatingProduct = async(req: any, res: any)=>{
     try{
         let userId=req.user._id;
@@ -1072,6 +1073,7 @@ exports.removeAddress = async (req: any, res: any) => {
     });
   }
 };
+
 
 exports.getOtherUserPostsandProducts = async(req:any, res:any)=>{
   try{
