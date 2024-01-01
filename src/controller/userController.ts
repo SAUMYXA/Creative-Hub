@@ -1183,7 +1183,10 @@ exports.getupdateproduct = async (req: any, res: any) => {
 //       }
     
 //   }
-  exports.addUserFollowing = async(req:any,res:any) => {
+  
+
+
+exports.addUserFollowing = async(req:any,res:any) => {
   const user_id=req.body._id;
   const userTofollow_id = req.params.id;
   if(user_id!==userTofollow_id){
