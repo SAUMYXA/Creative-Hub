@@ -699,6 +699,9 @@ exports.getUserFollowing = async (req:any, res:any) => {
 
 
 
+
+
+
 exports.getUserFollowers = async(req:any,res:any)=>{
   try{
       let userId = req.user._id;
@@ -741,6 +744,7 @@ exports.getOtherUserInfo = async(req:any, res:any)=>{
       res.json({error: err});
   }
 }
+
 
 // exports.addToCart = async (req : any, res : any) => {
 //     try {
