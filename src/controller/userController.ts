@@ -949,6 +949,7 @@ exports.getOtherUserInfo = async(req:any, res:any)=>{
     }
   };
   
+
   exports.removeFromCart = async (req :any, res : any) => {
     try {
       const userId = req.user._id;
