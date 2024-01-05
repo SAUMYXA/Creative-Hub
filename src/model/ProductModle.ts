@@ -116,7 +116,6 @@ var ProductSchema = new mongoose.Schema({
     hashtags: [{
       type: String
   }]
-
 }, {
     timestamps: true
 })
