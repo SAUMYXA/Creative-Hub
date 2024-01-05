@@ -1,6 +1,5 @@
 export{}
 const mongoose = require('mongoose');
-
 const BaseProductSchema = new mongoose.Schema({
     name: {
         type: String,
