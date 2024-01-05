@@ -24,7 +24,6 @@ export {};
 //         }
 //     }
 // );
-
 // const Payment = mongoose.model("Payment", paymentschema)
 
 // module.exports = Payment;
