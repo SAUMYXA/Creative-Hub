@@ -1,7 +1,6 @@
 export {};
 const mongoose = require('mongoose');
 
-
 const helpQuerySchema = new mongoose.Schema({
   name: String,
   email: String,
