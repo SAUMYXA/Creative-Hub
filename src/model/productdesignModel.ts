@@ -1,5 +1,4 @@
 export {}
-
 const mongoose = require('mongoose');
 
 var ProductDesignSchema = new mongoose.Schema({
