@@ -16,7 +16,6 @@
 //     messages: [],
 //     // Add more properties as needed
 //   };
-
 //   // Save chat session data in DynamoDB
 //   saveChatSessionToDynamoDB(chatSession, () => {
 //     // Create a WebSocket namespace for the chat session
