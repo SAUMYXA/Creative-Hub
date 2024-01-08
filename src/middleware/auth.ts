@@ -3,9 +3,6 @@
 // const jwt = require("jsonwebtoken");
 // const { collection } = require("../model/userModel");
 // const User = require("../model/userModel");
-
-
-
 // const auth = async (req: any, res: any, next: any) => {
 //   try {
 //     if (!req.header("Authorization")) {
