@@ -2,8 +2,6 @@ export {};
 
 const jwt = require("jsonwebtoken");
 const User = require("../model/userModel");
-
-
 const apiDocsAuth = async (req:any,res:any,next:any)=>{
     try{
         if(!req.cookies["Authorization"]){
