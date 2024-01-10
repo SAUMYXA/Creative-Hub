@@ -8,7 +8,6 @@ module.exports = cloudinary.config({
     api_secret: process.env.CLOUDNARY_SECRETKEY,
     secure: true
 });
-
 // module.exports = cloudinary.config({
 //     cloud_name: 'zigy-prints',
 //     api_key: '812215485516999',
