@@ -19,5 +19,4 @@ const connectDB = async (req: any,res: any) => {
     }
 }
 mongoose.set('strictQuery', true);
-
 module.exports = connectDB
