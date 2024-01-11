@@ -26,7 +26,6 @@
 //     };
 
 //     const savedAdminData = await Admin.create(adminData);
-
 //     res.status(201).json({
 //       message: 'Images Uploaded Successfully',
 //       data: savedAdminData,
@@ -36,7 +35,6 @@
 //     res.status(500).json({ error: 'An error occurred while uploading images and saving data.' });
 //   }
 // };
-
 // module.exports = {
 //   handleAdminUpload, // Export the handleAdminUpload function
 // };
