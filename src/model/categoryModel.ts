@@ -22,7 +22,6 @@ var categorySchema = new mongoose.Schema({
 }, {
     timestamps: true
 })
-
 const CategoryDB = mongoose.model('Category', categorySchema);
 
 module.exports = CategoryDB;

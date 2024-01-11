@@ -7,5 +7,4 @@ const storySchema = new mongoose.Schema({
   caption: String,
   createdAt: { type: Date, default: Date.now },
 });
-
 module.exports = mongoose.model('Story', storySchema);

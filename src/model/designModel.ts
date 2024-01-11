@@ -5,8 +5,7 @@ const designSchema = new mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "userModel",
-      },
-      
+      },   
 apparel:String,
 size:String,
 fabric:String,

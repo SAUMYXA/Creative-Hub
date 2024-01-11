@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-
 var zigyUserSchema = new mongoose.Schema({
     name: {
         type: String,

@@ -1,7 +1,6 @@
 // linkedAccountModel.ts
 export{}
 const mongoose = require('mongoose');
-
 const linkedAccountSchema = new mongoose.Schema({
   email: {
     type: String,

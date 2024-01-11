@@ -10,5 +10,4 @@ const isAuthorized =
     }
     next();
   };
-
 module.exports = isAuthorized;

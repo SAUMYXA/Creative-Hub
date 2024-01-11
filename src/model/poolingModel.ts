@@ -1,6 +1,5 @@
 export {};
 const mongoose = require('mongoose');
-
 const poolSchema = new mongoose.Schema({
   title: {
     type: String,

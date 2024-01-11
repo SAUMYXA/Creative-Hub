@@ -21,7 +21,6 @@ const chatMessageSchema = new mongoose.Schema({
     default: Date.now,
   },
 });
-
 const ChatMessage = mongoose.model('ChatMessage', chatMessageSchema);
 
 module.exports = ChatMessage;

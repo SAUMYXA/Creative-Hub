@@ -15,9 +15,6 @@ type s3params= {
     ContentType: string,
     ACL: string
 }
-
-
-
 const BUCKET_NAME=process.env.BUCKET_NAME;
 const BUCKET_REGION=process.env.BUCKET_REGION;    
 const ACCESS_KEY=process.env.ACCESS_KEY;

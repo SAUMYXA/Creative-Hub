@@ -1,9 +1,6 @@
 export {};
-
 const mongoose = require('mongoose');
 const customlog=require("../controller/loggerController")
-
-
 const connectDB = async (req: any,res: any) => {
     try {
         // mongodb connection string
@@ -22,5 +19,4 @@ const connectDB = async (req: any,res: any) => {
     }
 }
 mongoose.set('strictQuery', true);
-
 module.exports = connectDB

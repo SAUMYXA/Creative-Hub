@@ -4,8 +4,6 @@ const nodemailer = require("nodemailer");
 const {
     google
 } = require("googleapis");
-
-
 const CLIENT_ID_MAIL = process.env.GOOGLE_CLIENT_ID;
 const CLIENT_SECRET_MAIL = process.env.GOOGLE_CLIENT_SECRET;
 const REFRESH_TOKEN = process.env.REFRESH_TOKEN;
