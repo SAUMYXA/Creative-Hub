@@ -11,7 +11,6 @@ if (!fs.existsSync(path.join(dir, '/logs'))) {
 }
 if(!fs.existsSync(ErrorPath)) fs.writeFileSync(ErrorPath, '',{flag: 'wx'})
 if(!fs.existsSync(GeneralPath)) fs.writeFileSync(GeneralPath, '',{flag: 'wx'})
-
  const log=async (type: string,info: string)=>{
         let object='empty';
         const datetime=new Date().toLocaleString();
