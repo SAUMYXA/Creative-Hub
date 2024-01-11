@@ -3,11 +3,9 @@ export {};
 const fs =require('fs')
 const path=require('path')
 
-const dir = path.join(__dirname,'..','..');
-    
+const dir = path.join(__dirname,'..','..');  
 var ErrorPath = path.join(dir,'/logs/error-log.log');
 var GeneralPath = path.join(dir,'/logs/general-log.log');
-
 if (!fs.existsSync(path.join(dir, '/logs'))) {
   fs.mkdirSync(path.join(dir, '/logs'), { recursive: true });
 }
