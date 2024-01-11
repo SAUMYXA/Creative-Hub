@@ -152,7 +152,6 @@ exports.generatesku = async(req: any , res: any) => {
             const designSKU: string = generateDesignSKU(prefixSKU, objectCounter); // Generate the SKU for the design
 
             console.log(designSKU); 
-
     }catch (err: any) {
         customlog.log('error','error while generating SKU Token !');
         res.send({
