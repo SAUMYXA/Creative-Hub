@@ -100,8 +100,6 @@ exports.getCategories = async (req: any, res: any) => {
         });
     }
 }
-
-
 exports.upload3d = async (req: any, res: any) => {
     try {
         
@@ -128,7 +126,6 @@ exports.upload3d = async (req: any, res: any) => {
         });
     }
 }
-
 exports.generatesku = async(req: any , res: any) => {
     try{
             // Function to generate a random SKU for a design
