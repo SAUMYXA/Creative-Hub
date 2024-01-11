@@ -11,7 +11,6 @@ var GeneralPath = path.join(dir,'/logs/general-log.log');
 if (!fs.existsSync(path.join(dir, '/logs'))) {
   fs.mkdirSync(path.join(dir, '/logs'), { recursive: true });
 }
-
 if(!fs.existsSync(ErrorPath)) fs.writeFileSync(ErrorPath, '',{flag: 'wx'})
 if(!fs.existsSync(GeneralPath)) fs.writeFileSync(GeneralPath, '',{flag: 'wx'})
 
