@@ -26,8 +26,6 @@ const s3=new S3({
     },
     region:BUCKET_REGION
 })
-
-
 exports.uploadCategory = async (req: any, res: any) => {
     try {
         const buffer= await sharp(req.file.buffer).resize({height:1920,width:1080,fit:"contain"}).toBuffer();
