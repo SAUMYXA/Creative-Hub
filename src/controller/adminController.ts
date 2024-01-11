@@ -140,9 +140,7 @@ exports.generatesku = async(req: any , res: any) => {
                 const designCounter = counter.toString()
                 const designSKU = `${prefixSKU}${randomNum}${designCounter}`; // Combine prefix SKU, random number, and design counter
                 return designSKU;
-            }
-
-            
+            }  
             const prefixSKU: string = 'TSE'; // Prefix SKU for the object 
             //Ask how to dertermine the universal 
             const objectCounter: number = 1; // Counter value for the object 
