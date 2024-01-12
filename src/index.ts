@@ -16,7 +16,6 @@ const AWS = require("aws-sdk");
 const connectDB = require("./database/connection");
 
 //cors
-
 // Starting the server
 const app = express();
 // const  http=require('http').Server(app)
