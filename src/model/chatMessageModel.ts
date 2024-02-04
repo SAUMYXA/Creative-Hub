@@ -1,6 +1,5 @@
 export {};
 const mongoose = require('mongoose');
-
 const chatMessageSchema = new mongoose.Schema({
   sender: {
     type: mongoose.Schema.Types.ObjectId,
