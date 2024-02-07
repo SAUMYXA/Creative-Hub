@@ -1,5 +1,4 @@
 export {};
-
 const express = require("express");
 const route = express.Router();
 const passport = require("passport");
