@@ -624,35 +624,8 @@ exports.getDeliveryAddress = async(req:any , res:any)=>{
 }
 
 // Update the getUserFollowing API
-exports.getUserFollowing = async (req:any, res:any) => {
 
-    try {
-      const userId = req.body.userId;
-      const user = await User.findById(userId);
-      if (!user) {
-        return res.status(404).json({ message: 'User not found' });
-      }
-  
-      // Get an array of user IDs that the user is following, including their own ID
-      const followingIds = [userId, ...user.following.map((id: any) => id.toString())];
-  
-      const userDetails = [];
-  
-      // Loop through users in followingIds and collect their details
-      for (const followingId of followingIds) {
-        const followingUser = await User.findById(followingId);
-        if (followingUser) {
-          const { _id, username, ProfileUrl } = followingUser;
-          userDetails.push({ _id, username, ProfileUrl });
-        }
-      }
-  
-      res.json(userDetails);
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: 'Internal Server Error' });
-    }
-  }
+
 
 // Update the getUserFollowing API
 exports.getUserFollowing = async (req:any, res:any) => {
@@ -674,7 +647,7 @@ exports.getUserFollowing = async (req:any, res:any) => {
         const followingUser = await User.findById(followingId);
         if (followingUser) {
           const { _id, username, ProfileUrl } = followingUser;
-          userDetails.push({ _id, username, ProfileUrl });
+          // userDetails.push({ _id, username, ProfileUrl });
         }
       }
   
